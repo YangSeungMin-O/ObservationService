@@ -31,6 +31,22 @@
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
         <property name="paramName" value="language" />
     </bean>
+    
+    <!-- Json Setting -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="viewResolver" p:order="0" />
+	
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType" value="text/html;charset=UTF-8"/>
+	</bean>
+
+	<!-- Jackson Setting -->
+	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
 
 <!--     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultErrorView" value="cmmn/egovError"/>

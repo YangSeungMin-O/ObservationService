@@ -29,15 +29,4 @@ public class MainController {
 		mav.setViewName(resultURL);
 		return mav;
 	};
-	
-	/* 메인페이지 데이터 */
-	@RequestMapping(value = "/mainPage/getList.do")
-	@ResponseBody
-	public Map<String, Object> getList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
-		//List<Map<String, Object>> list = service.getList(commandMap);
-		Map<String, Object> result = new HashMap<String, Object>();
-		//result.put("list", list);
-		result.put("DATA", "DATA");
-		return result;
-	};
 };
