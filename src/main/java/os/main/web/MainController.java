@@ -22,13 +22,11 @@ public class MainController {
 	/* 메인페이지 */
 	@RequestMapping(value = "/mainPage.do")
 	public ModelAndView mainPage(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		
-		/* DB연동 테스트 */
-		System.out.println(service.getCount());
-		
+		ModelAndView mav = new ModelAndView();		
 		String resultURL = "main/mainPage";
 		mav.setViewName(resultURL);
 		return mav;
 	}
+	
+	/* 메인페이지 데이터 */
 }
