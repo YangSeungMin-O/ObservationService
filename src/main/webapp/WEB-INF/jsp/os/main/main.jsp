@@ -9,15 +9,7 @@
 <script src="/js/os/common/common.js"></script>
 <script src="/js/os/main/main.js"></script>
 <title>관측서비스-메인페이지</title>
-<style type="text/css">
-.map {
-	width : 30%;
-	height: 400px;
-}	
-</style>
 </head>
 <body>
-	<h1>관측서비스-메인페이지</h1>
-    <div id="map" class="map"></div>
 </body>
 </html>

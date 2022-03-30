@@ -23,7 +23,7 @@ public class MainController {
 	@RequestMapping(value = "/mainPage.do")
 	public ModelAndView mainPage(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
 		ModelAndView mav = new ModelAndView();		
-		String resultURL = "main/mainPage";
+		String resultURL = "main/main";
 		mav.setViewName(resultURL);
 		return mav;
 	}
