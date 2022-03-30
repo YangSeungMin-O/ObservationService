@@ -1,6 +1,5 @@
 package os.main.web;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import os.main.service.MainService;
@@ -25,8 +23,12 @@ public class MainController {
 	@RequestMapping(value = "/mainPage.do")
 	public ModelAndView mainPage(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		
+		/* DB연동 테스트 */
+		System.out.println(service.getCount());
+		
 		String resultURL = "main/mainPage";
 		mav.setViewName(resultURL);
 		return mav;
-	};
-};
+	}
+}

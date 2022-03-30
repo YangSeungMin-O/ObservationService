@@ -55,6 +55,18 @@
 	</repositories>
 
 	<dependencies>
+		<!-- PostgreSQL JDBC Driver -->
+		 <dependency>
+		  <groupId>postgresql</groupId>
+		  <artifactId>postgresql</artifactId>
+		  <version>9.1-901.jdbc4</version>
+		</dependency>
+		<!-- Spring JDBC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>4.3.2.RELEASE</version>
+		</dependency>
 		<!-- Json -->
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
