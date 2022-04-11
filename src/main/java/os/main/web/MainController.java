@@ -27,6 +27,4 @@ public class MainController {
 		mav.setViewName(resultURL);
 		return mav;
 	}
-	
-	/* 메인페이지 데이터 */
 }
