@@ -20,24 +20,26 @@
 <body>
 	<h2>MainPage</h2>
 	<div id="map"></div>
-	<table border="1" style="text-align: center; height:100px; width:400px;">
-		<tr>
-			<td>GL</td>
-			<td>EL</td>
-			<td>전기전도도</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>1</td>
-			<td>1</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>1</td>
-			<td>1</td>
-		</tr>
-	</table>
-	<div style="position: relative; height:200px; width:400px;">
+	<div id="table">
+		<table border="1" style="text-align: center; height:100px; width:400px;">
+			<tr>
+				<td>GL</td>
+				<td>EL</td>
+				<td>전기전도도</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+		</table>
+	</div>
+	<div id="chart" style="position: relative; height:200px; width:400px;">
 		<canvas id="myChart"></canvas>
 	</div>
 </body>
