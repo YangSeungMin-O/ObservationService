@@ -4,6 +4,7 @@ $(function(){
 
 var map;
 var pointLocation = [];
+
 var rasterLayer =  new ol.layer.Tile({
 	source: new ol.source.XYZ({url: 'http://xdworld.vworld.kr:8080/2d/Base/201710/{z}/{x}/{y}.png'})
 })
@@ -70,7 +71,6 @@ function createMap(){
 		controls: ol.control.defaults().extend( [mousePositionCtrl] ),
 		layers: [new ol.layer.Tile({
 					source: new ol.source.XYZ({
-						/* vWorld API 사용 */
 						url: 'http://xdworld.vworld.kr:8080/2d/Base/202002/{z}/{x}/{y}.png'
 					})
 					}),
@@ -80,7 +80,6 @@ function createMap(){
 	        center: new ol.geom.Point([ 126.97659953, 37.579220423 ])
 	      	/* GPS 좌표계 -> 구글 좌표계 */
 	        .transform('EPSG:4326', 'EPSG:3857')
-	        /* 포인트의 좌표를 리턴 */
         	.getCoordinates(),
 			zoom: 7,
 			minZoom: 7,
@@ -90,8 +89,8 @@ function createMap(){
 	
 	/* 클릭한 지도위치 좌표 반환(배열) */
 	map.on('click', function(evt) {
+		console.log(evt)
 	    var coordinate = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
-	    console.log(coordinate);
 	    /* 클릭한 좌표로 마커 생성 */
 	    addMarker(coordinate);
 	})
@@ -128,12 +127,12 @@ function addMarker(coordinate){
 /* 마커현행유지 위한 마커생성 모듈 */
 function addMarker2(coordinate){
     var feature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([coordinate[0], coordinate[1]])) //경도 위도에 포인트 설정
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([coordinate[0], coordinate[1]]))
     });
 
     /* 마커스타일 설정 */
     var markerStyle = new ol.style.Style({
-        image: new ol.style.Icon({ //마커 이미지
+        image: new ol.style.Icon({
         	opacity: 1,
         	scale: 1.2,
             src: '/images/marker3.png'
@@ -148,6 +147,6 @@ function addMarker2(coordinate){
         source: markerSource, 
         style: markerStyle 
     });
-    /* 지도에 마커가 그려진 레이어 추가 */
+    /* 지도에 마커추가 */
     map.addLayer(markerLayer);
 }

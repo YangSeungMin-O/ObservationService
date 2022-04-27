@@ -27,6 +27,22 @@ public class MainController {
 		mav.setViewName(resultURL);
 		return mav;
 	}
+	/* 메인페이지2 */
+	@RequestMapping(value = "/mainPage2.do")
+	public ModelAndView mainPage2(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
+		ModelAndView mav = new ModelAndView();		
+		String resultURL = "mainPage/polygon";
+		mav.setViewName(resultURL);
+		return mav;
+	}
+	/* 메인페이지3 */
+	@RequestMapping(value = "/mainPage3.do")
+	public ModelAndView mainPage3(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
+		ModelAndView mav = new ModelAndView();		
+		String resultURL = "mainPage/geogreenPage";
+		mav.setViewName(resultURL);
+		return mav;
+	}
 	
 	/* 기상청 단기예보(동네예보) API */
 /*	@RequestMapping(value = "/weatherData.do")
