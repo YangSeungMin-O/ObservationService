@@ -107,14 +107,14 @@
       	<div class="right">
 	    	<form class="form-inline">
  		    	<!-- <label for="type">Geometry type: &nbsp;</label> -->
-		      	<select class="form-control mr-2 mb-2 mt-2" id="type" style="margin-left: 10px;">
+		      	<select class="form-control mr-2 mb-2 mt-2" id="type" style="margin-left: 10px; width: 120px;">
 		        	<option value="Point">Point</option>
 		        	<option value="LineString">LineString</option>
 		        	<option value="Polygon">Polygon</option>
 		        	<option value="Circle">Circle</option>
 		        	<option value="None">None</option>
 		      	</select>
-		      	<select class="form-control mr-2 mb-2 mt-2" id="mapType" style="margin-left: 10px;">
+		      	<select class="form-control mr-2 mb-2 mt-2" id="mapType" style="width: 135px;">
 		        	<option value="vWorld">vWorld</option>
 		        	<option value="SatelLite">SatelLite</option>
 		        	<option value="Hybrid">Hybrid</option>
