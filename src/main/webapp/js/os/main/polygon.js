@@ -15,6 +15,7 @@ var satelliteLayer =  new ol.layer.Tile({
 $(function(){
 	/* 지도생성 */
 	createMap();
+	weatherApiCall();
 	
 	/* 폴리곤 타입 */
     var typeSelect = document.getElementById('type');
@@ -64,19 +65,6 @@ $(function(){
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 지도생성 모듈 */
 function createMap(){
 	raster = new ol.layer.Tile({
@@ -116,20 +104,32 @@ function mapUpdate(option){
 	switch (option) {
 	case 'vWord':
 		map.addLayer(rasterLayer);
-		markerView();
 		break;
 	case 'Hybrid':
 		map.addLayer(satelliteLayer);
 		map.addLayer(hybridLayer);
-		markerView();
 		break;
 	case 'SatelLite':
 		map.addLayer(satelliteLayer);
-		markerView();
 		break;
 	case undefined:
 		map.addLayer(rasterLayer);
-		markerView();
 		break;
 	}
 }
+
+/* 날씨 API 호출 */
+function weatherApiCall(){
+    $.ajax({
+        type : "GET",
+        url  : "/weatherData.do",
+        dataType : "JSON",
+        success: function(result){
+        	console.log(result.result);
+        }
+    });
+}
+
+
+
+

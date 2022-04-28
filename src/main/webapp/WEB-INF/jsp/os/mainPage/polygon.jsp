@@ -88,7 +88,7 @@
 			<div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
 				<ul class="navbar-nav">
 			    	<li class="nav-item">
-			      		<a class="nav-link" href="#">Login</a>
+			      		<a class="nav-link" href="/loginPage.do">Login</a>
 			    	</li>
 			    	<li class="nav-item">
 			      		<a class="nav-link" href="#">MyPage</a>
