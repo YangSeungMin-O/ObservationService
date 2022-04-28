@@ -127,6 +127,7 @@
 			</div>
    		</div>
       	<div class="right2">
+      			    <button id="removeAllLay" class="btn btn-danger">RemoveAllLayer</button>
       	</div>
     </div>
 </body>

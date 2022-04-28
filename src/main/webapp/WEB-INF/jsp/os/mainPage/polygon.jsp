@@ -122,6 +122,9 @@
 		    </form>
 		    <button id="removeLay" class="btn btn-danger">RemoveLayer</button>
 		    <button id="removeAllLay" class="btn btn-danger">RemoveAllLayer</button>
+		    <div>
+		    
+		    </div>
    		</div>
     </div>
 </body>

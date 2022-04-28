@@ -56,7 +56,7 @@ public class MainController {
 	/* 기상개황, 육상, 해상 */
 	/* 통보문 발표시간 05시 11시 17시 */
 	@RequestMapping(value = "/weatherData.do")
-    public ModelAndView weatherData(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws IOException, IOException, ParseException {
+    public ModelAndView weatherData() throws IOException, IOException, ParseException {
 		ModelAndView jsonView = new ModelAndView("jsonView");
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstMsgService/getLandFcst"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=9wnMobsB4Ky4A%2BrjVg9P3BBdVjFEmqEEI70Uc49cCp8bNo%2Bopo3J%2FjtjlbGGbcp4yax%2BWzn%2BjGn23RF4DBtwfg%3D%3D"); /*Service Key*/
@@ -94,6 +94,10 @@ public class MainController {
 		JSONObject parse_items = (JSONObject) parse_body.get("items");
 		JSONArray parse_item = (JSONArray) parse_items.get("item");
         
+		SimpleDateFormat currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
+		String latestDate = currentDateTime.format(new Date()).toString();
+		System.out.println("현재 시간 : " + latestDate + " 호출 합니다");
+		
         jsonView.addObject("result", parse_item);
         return jsonView;
     }
@@ -102,7 +106,7 @@ public class MainController {
 //	  @Scheduled(fixedRateString = "60000", initialDelay = 3000)	//1분마다 3초 대기 후
 //    @Scheduled(cron = " * * * * * * ")	//매초마다
 //    public void timeScheduled() {
-//        SimpleDateFormat currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
+//      SimpleDateFormat currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
 //		String latestDate = currentDateTime.format(new Date()).toString();
 //		System.out.println("현재 시간 : " + latestDate + " 호출 합니다");
 //    }
