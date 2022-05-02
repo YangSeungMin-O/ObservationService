@@ -2,28 +2,35 @@ var map;
 var source;
 var vector;
 var raster;
+/* 브이월드 */
 var rasterLayer =  new ol.layer.Tile({
 	source: new ol.source.XYZ({url: 'http://xdworld.vworld.kr:8080/2d/Base/201710/{z}/{x}/{y}.png'})
 })
+/* 하이브리드 */
 var hybridLayer =  new ol.layer.Tile({
 	source: new ol.source.XYZ({url: 'http://xdworld.vworld.kr:8080/2d/Hybrid/201612/{z}/{x}/{y}.png'})
 })
+/* 위성지도 */
 var satelliteLayer =  new ol.layer.Tile({
 	source: new ol.source.XYZ({url: 'http://xdworld.vworld.kr:8080/2d/Satellite/201710/{z}/{x}/{y}.jpeg'})
 })
+
 /* 이벤트 함수 */
 $(function(){
 	/* 지도생성 */
 	createMap();
-	weatherApiCall();
-	
-	/* 폴리곤 타입 */
+	/* 차트생성 */
+	createChart();
+	/* 선택한 도형 타입 */
     var typeSelect = document.getElementById('type');
+    /* 선택한 지도 타입 */
     var mapTypeSelect = document.getElementById('mapType');
+    /* 커서 타입 */
     var draw;
 	
     /* 타입이 바뀌면 */
     typeSelect.onchange = function(){
+    	console.log(draw);
     	/* 커서효과 초기화 */
         map.removeInteraction(draw);
         addInteraction();
@@ -48,20 +55,10 @@ $(function(){
                 type: value
             });
             map.addInteraction(draw);
-        }
+        }else if (value == 'Marker') {
+			alert("Marker");
+		}
     }
-    
-    /* 레이어 순차적 삭제 */
-    $("#removeLay").click(function(){
-    	alert("Remove");
-    	console.log(vector);
-    });
-    /* 레이어 모두 삭제 */
-    $("#removeAllLay").click(function(){
-    	alert("RemoveAll");
-    	/* 지워지긴 하나 다음 도형이 그려지지 않음 (마우스형태는 그대로) */
-		map.removeLayer(vector);	
-    });
 })
 
 
@@ -118,8 +115,47 @@ function mapUpdate(option){
 	}
 }
 
-/* 날씨 API 호출 */
-function weatherApiCall(){
+/* 차트그리기 모듈 */
+function createChart(){
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+	        datasets: [{
+	            label: '# of Votes',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }
+	        }
+	    }
+	});
+}
+
+/* API호출 (기상청 예시) */
+/*function weatherApiCall(){
     $.ajax({
         type : "GET",
         url  : "/weatherData.do",
@@ -128,8 +164,4 @@ function weatherApiCall(){
         	console.log(result.result);
         }
     });
-}
-
-
-
-
+}*/

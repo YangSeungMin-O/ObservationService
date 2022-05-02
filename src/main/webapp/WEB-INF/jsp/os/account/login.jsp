@@ -13,7 +13,7 @@
 <body>
     <div class="login-box showed">
         <form class="login-form" action="index.html" method="post">
-            <h1>관측서비스</h1>
+            <h1>ObservationService</h1>
             <input class="txtb" type="text" name="id" placeholder="Username">
             <input class="txtb" type="password" name="password" placeholder="Password">
             <input class="login-btn" type="button" name="login-btn" onclick="goSignUp()" value="회원가입">

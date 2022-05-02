@@ -11,5 +11,5 @@ function goFindPw(){
 
 /* 로그인 */
 function goLogin(){
-
+	location.href = "/mainPage.do";
 }

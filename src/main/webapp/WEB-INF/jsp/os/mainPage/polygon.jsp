@@ -6,6 +6,7 @@
 <title>관측서비스-대시보드</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
@@ -52,12 +53,50 @@
 	#removeLay {
 		margin-left: 10px;
 	}
+	.rounded1 {
+	  	width: 90%;
+	  	height: 300px;
+	  	background-color: #A9A9A9;
+	  	padding: 0.5rem;
+	  	line-height: 1rem;
+	  	border-radius: 15px;
+	  	margin-left: 10px;
+	  	margin-top: 7px;
+	}
+	.rounded2 {
+	  	width: 90%;
+	  	height: 300px;
+	  	background-color: #A9A9A9;
+	  	padding: 0.5rem;
+	  	line-height: 1rem;
+	  	border-radius: 15px;
+	  	margin-left: 10px;
+	  	margin-top: 7px;
+	}
+	.rounded3 {
+	  	width: 90%;
+	  	height: 160px;
+	  	background-color: #A9A9A9;
+	  	padding: 0.5rem;
+	  	line-height: 1rem;
+	  	border-radius: 15px;
+	  	margin-left: 10px;
+	  	margin-top: 7px;
+	}
+	#chartDiv {
+		width: 480px;
+		height: 300px;
+	}
+	.table {
+		align-content: center;
+		text-align: center;
+	}
 </style>
 </head>
 <body>
 	<!-- 헤더 -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="/mainPage2.do">ObservationService</a>
+		<a class="navbar-brand" href="/mainPage.do">ObservationService</a>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav navbar-dark">
 				<li class="nav-item dropdown">
@@ -112,6 +151,7 @@
 		        	<option value="LineString">LineString</option>
 		        	<option value="Polygon">Polygon</option>
 		        	<option value="Circle">Circle</option>
+		        	<option value="Marker">Marker</option>
 		        	<option value="None">None</option>
 		      	</select>
 		      	<select class="form-control mr-2 mb-2 mt-2" id="mapType" style="width: 135px;">
@@ -122,9 +162,60 @@
 		    </form>
 		    <button id="removeLay" class="btn btn-danger">RemoveLayer</button>
 		    <button id="removeAllLay" class="btn btn-danger">RemoveAllLayer</button>
-		    <div>
-		    
-		    </div>
+			<div class='rounded1'>
+				<h4>Site Information(Table)</h4>
+				<table class="table">
+				  	<thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">First</th>
+					      <th scope="col">Last</th>
+					      <th scope="col">Handle</th>
+					    </tr>
+				  	</thead>
+				  	<tbody>
+					    <tr>
+					      <th scope="row">1</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@mdo</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">2</th>
+					      <td>Jacob</td>
+					      <td>Thornton</td>
+					      <td>@fat</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">3</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@twitter</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">4</th>
+					      <td>Jacob</td>
+					      <td>Thornton</td>
+					      <td>@mdo</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">5</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@fat</td>
+					    </tr>
+				  	</tbody>
+				</table>
+			</div>
+			<div class='rounded2'>
+				<h4>Data Analysis(Chart)</h4>
+				<div id="chartDiv">
+					<canvas id="myChart"></canvas>
+				</div>
+			</div>
+			<div class='rounded3'>
+				<h4>Weather(API DATA)</h4>
+			</div>
    		</div>
     </div>
 </body>
