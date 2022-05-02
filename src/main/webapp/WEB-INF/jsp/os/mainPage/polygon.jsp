@@ -18,79 +18,98 @@
 <script type="text/javascript">
 </script>
 <style type="text/css">
-	#contentDiv {
-	}
-	#map {
-		height: 100%;
-		width : 100%;
-	}
-	#status {
-		width:200px;
-		text-align: center;
-		margin-left: 10px;
-		margin-top: 10px;
-	}
-	.left {
-		width: 70%;
-		height: 880px;
-		float: left;
-		box-sizing: border-box;
-		background: #D3D3D3;
-	}
-	.right {
-		width: 30%;
-		height: 880px;
-		float: left;
-		box-sizing: border-box;
-		background: #D3D3D3;
-	}
-	.a {
-		height: 48px;
-	}
-	.form-check {
-		margin-left: 10px;
-	}
-	#removeLay {
-		margin-left: 10px;
-	}
-	.rounded1 {
-	  	width: 90%;
-	  	height: 300px;
-	  	background-color: #A9A9A9;
-	  	padding: 0.5rem;
-	  	line-height: 1rem;
-	  	border-radius: 15px;
-	  	margin-left: 10px;
-	  	margin-top: 7px;
-	}
-	.rounded2 {
-	  	width: 90%;
-	  	height: 300px;
-	  	background-color: #A9A9A9;
-	  	padding: 0.5rem;
-	  	line-height: 1rem;
-	  	border-radius: 15px;
-	  	margin-left: 10px;
-	  	margin-top: 7px;
-	}
-	.rounded3 {
-	  	width: 90%;
-	  	height: 160px;
-	  	background-color: #A9A9A9;
-	  	padding: 0.5rem;
-	  	line-height: 1rem;
-	  	border-radius: 15px;
-	  	margin-left: 10px;
-	  	margin-top: 7px;
-	}
-	#chartDiv {
-		width: 480px;
-		height: 300px;
-	}
-	.table {
-		align-content: center;
-		text-align: center;
-	}
+#contentDiv {
+	
+}
+
+#map {
+	height: 100%;
+	width: 100%;
+}
+
+#status {
+	width: 200px;
+	text-align: center;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.left {
+	width: 70%;
+	height: 880px;
+	float: left;
+	box-sizing: border-box;
+	background: #D3D3D3;
+}
+
+.right {
+	width: 30%;
+	height: 880px;
+	float: left;
+	box-sizing: border-box;
+	background: #D3D3D3;
+}
+
+.a {
+	height: 48px;
+}
+
+.form-check {
+	margin-left: 10px;
+}
+
+#removeLay {
+	margin-left: 10px;
+}
+
+.rounded1 {
+	width: 90%;
+	height: 300px;
+	background-color: #A9A9A9;
+	padding: 0.5rem;
+	line-height: 1rem;
+	border-radius: 15px;
+	margin-left: 10px;
+	margin-top: 7px;
+	overflow-y: auto;
+	-ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+.rounded2 {
+	width: 90%;
+	height: 300px;
+	background-color: #A9A9A9;
+	padding: 0.5rem;
+	line-height: 1rem;
+	border-radius: 15px;
+	margin-left: 10px;
+	margin-top: 7px;
+}
+
+.rounded3 {
+	width: 90%;
+	height: 160px;
+	background-color: #A9A9A9;
+	padding: 0.5rem;
+	line-height: 1rem;
+	border-radius: 15px;
+	margin-left: 10px;
+	margin-top: 7px;
+}
+
+#chartDiv {
+	width: 480px;
+	height: 300px;
+}
+
+.table {
+	align-content: center;
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -197,6 +216,36 @@
 					      <td>Jacob</td>
 					      <td>Thornton</td>
 					      <td>@mdo</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">5</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@fat</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">5</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@fat</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">5</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@fat</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">5</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@fat</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">5</th>
+					      <td>Mark</td>
+					      <td>Otto</td>
+					      <td>@fat</td>
 					    </tr>
 					    <tr>
 					      <th scope="row">5</th>
