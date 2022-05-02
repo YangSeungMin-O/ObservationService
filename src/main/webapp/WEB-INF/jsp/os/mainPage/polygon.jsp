@@ -14,106 +14,101 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
 <script type="text/javascript" src="/js/os/main/polygon.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css">
-<!-------------------------------------------------- 스크립트 시작 -------------------------------------------------->
+<!------------------------------------------------------------- 스크립트 시작 ------------------------------------------------------------->
 <script type="text/javascript">
 </script>
 <style type="text/css">
-#contentDiv {
+	#map {
+		height: 100%;
+		width: 100%;
+	}
 	
-}
-
-#map {
-	height: 100%;
-	width: 100%;
-}
-
-#status {
-	width: 200px;
-	text-align: center;
-	margin-left: 10px;
-	margin-top: 10px;
-}
-
-.left {
-	width: 70%;
-	height: 880px;
-	float: left;
-	box-sizing: border-box;
-	background: #D3D3D3;
-}
-
-.right {
-	width: 30%;
-	height: 880px;
-	float: left;
-	box-sizing: border-box;
-	background: #D3D3D3;
-}
-
-.a {
-	height: 48px;
-}
-
-.form-check {
-	margin-left: 10px;
-}
-
-#removeLay {
-	margin-left: 10px;
-}
-
-.rounded1 {
-	width: 90%;
-	height: 300px;
-	background-color: #A9A9A9;
-	padding: 0.5rem;
-	line-height: 1rem;
-	border-radius: 15px;
-	margin-left: 10px;
-	margin-top: 7px;
-	overflow-y: auto;
-	-ms-overflow-style: none;
-}
-
-::-webkit-scrollbar {
-	display: none;
-}
-
-.rounded2 {
-	width: 90%;
-	height: 300px;
-	background-color: #A9A9A9;
-	padding: 0.5rem;
-	line-height: 1rem;
-	border-radius: 15px;
-	margin-left: 10px;
-	margin-top: 7px;
-}
-
-.rounded3 {
-	width: 90%;
-	height: 160px;
-	background-color: #A9A9A9;
-	padding: 0.5rem;
-	line-height: 1rem;
-	border-radius: 15px;
-	margin-left: 10px;
-	margin-top: 7px;
-}
-
-#chartDiv {
-	width: 480px;
-	height: 300px;
-}
-
-.table {
-	align-content: center;
-	text-align: center;
-}
+	#status {
+		width: 200px;
+		text-align: center;
+		margin-left: 10px;
+		margin-top: 10px;
+	}
+	
+	.left {
+		width: 70%;
+		height: 880px;
+		float: left;
+		box-sizing: border-box;
+		background: #D3D3D3;
+	}
+	
+	.right {
+		width: 30%;
+		height: 880px;
+		float: left;
+		box-sizing: border-box;
+		background: #D3D3D3;
+	}
+	
+	.a {
+		height: 48px;
+	}
+	
+	.form-check {
+		margin-left: 10px;
+	}
+	
+	#removeLay {
+		margin-left: 10px;
+	}
+	
+	.rounded1 {
+		width: 90%;
+		height: 300px;
+		background-color: #A9A9A9;
+		padding: 0.5rem;
+		line-height: 1rem;
+		border-radius: 15px;
+		margin-left: 10px;
+		margin-top: 7px;
+		overflow-y: auto;
+		-ms-overflow-style: none;
+	}
+	
+	::-webkit-scrollbar {
+		display: none;
+	}
+	
+	.rounded2 {
+		width: 90%;
+		height: 300px;
+		background-color: #A9A9A9;
+		padding: 0.5rem;
+		line-height: 1rem;
+		border-radius: 15px;
+		margin-left: 10px;
+		margin-top: 7px;
+	}
+	
+	.rounded3 {
+		width: 90%;
+		height: 160px;
+		background-color: #A9A9A9;
+		padding: 0.5rem;
+		line-height: 1rem;
+		border-radius: 15px;
+		margin-left: 10px;
+		margin-top: 7px;
+	}
+	
+	#chartDiv {
+		width: 480px;
+		height: 300px;
+	}
+	
+	.table {
+		align-content: center;
+		text-align: center;
+	}
 </style>
 </head>
 <body>
-	<!-- 헤더 -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<a class="navbar-brand" href="/mainPage.do">ObservationService</a>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -162,9 +157,8 @@
 			<div id="map"></div>
 		</div>
 		<!-- 오른쪽 컨텐츠 내용 -->
-      	<div class="right">
+      	<div id="rightDiv" class="right">
 	    	<form class="form-inline">
- 		    	<!-- <label for="type">Geometry type: &nbsp;</label> -->
 		      	<select class="form-control mr-2 mb-2 mt-2" id="type" style="margin-left: 10px; width: 120px;">
 		        	<option value="Point">Point</option>
 		        	<option value="LineString">LineString</option>
@@ -224,31 +218,31 @@
 					      <td>@fat</td>
 					    </tr>
 					    <tr>
-					      <th scope="row">5</th>
+					      <th scope="row">6</th>
 					      <td>Mark</td>
 					      <td>Otto</td>
 					      <td>@fat</td>
 					    </tr>
 					    <tr>
-					      <th scope="row">5</th>
+					      <th scope="row">7</th>
 					      <td>Mark</td>
 					      <td>Otto</td>
 					      <td>@fat</td>
 					    </tr>
 					    <tr>
-					      <th scope="row">5</th>
+					      <th scope="row">8</th>
 					      <td>Mark</td>
 					      <td>Otto</td>
 					      <td>@fat</td>
 					    </tr>
 					    <tr>
-					      <th scope="row">5</th>
+					      <th scope="row">9</th>
 					      <td>Mark</td>
 					      <td>Otto</td>
 					      <td>@fat</td>
 					    </tr>
 					    <tr>
-					      <th scope="row">5</th>
+					      <th scope="row">10</th>
 					      <td>Mark</td>
 					      <td>Otto</td>
 					      <td>@fat</td>

@@ -86,8 +86,8 @@ function createMap(){
 	        center: new ol.geom.Point([ 126.97659953, 37.579220423 ])
 	        .transform('EPSG:4326', 'EPSG:3857')
 	    	.getCoordinates(),
-			zoom: 12,
-			minZoom: 7,
+			zoom: 13,
+			minZoom: 6.5,
 			maxZoom: 19
 		})
 	});
@@ -123,7 +123,7 @@ function createChart(){
 	    data: {
 	        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 	        datasets: [{
-	            label: '# of Votes',
+	            label: 'Label',
 	            data: [12, 19, 3, 5, 2, 3],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
@@ -154,14 +154,14 @@ function createChart(){
 	});
 }
 
+function slideMenu() {
+	$("#rightDiv").hide();
+	$("#map").css("width", 2000);
+}
+
 /* API호출 (기상청 예시) */
-/*function weatherApiCall(){
-    $.ajax({
-        type : "GET",
-        url  : "/weatherData.do",
-        dataType : "JSON",
-        success: function(result){
-        	console.log(result.result);
-        }
-    });
-}*/
+/*
+ * function weatherApiCall(){ $.ajax({ type : "GET", url : "/weatherData.do",
+ * dataType : "JSON", success: function(result){ console.log(result.result); }
+ * }); }
+ */
