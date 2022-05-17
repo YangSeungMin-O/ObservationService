@@ -1,19 +1,97 @@
-$(function(){
-	createMap();
-})
-
 var map;
-var pointLocation = [];
-
+var source;
+var vector;
+var raster;
+/* 브이월드 */
 var rasterLayer =  new ol.layer.Tile({
 	source: new ol.source.XYZ({url: 'http://xdworld.vworld.kr:8080/2d/Base/201710/{z}/{x}/{y}.png'})
 })
+/* 하이브리드 */
 var hybridLayer =  new ol.layer.Tile({
 	source: new ol.source.XYZ({url: 'http://xdworld.vworld.kr:8080/2d/Hybrid/201612/{z}/{x}/{y}.png'})
 })
+/* 위성지도 */
 var satelliteLayer =  new ol.layer.Tile({
 	source: new ol.source.XYZ({url: 'http://xdworld.vworld.kr:8080/2d/Satellite/201710/{z}/{x}/{y}.jpeg'})
 })
+
+/* 이벤트 함수 */
+$(function(){
+	/* 지도생성 */
+	createMap();
+	/* 차트생성 */
+	createChart();
+	/* 선택한 도형 타입 */
+    var typeSelect = document.getElementById('type');
+    /* 선택한 지도 타입 */
+    var mapTypeSelect = document.getElementById('mapType');
+    /* 커서 타입 */
+    var draw;
+	
+    /* 타입이 바뀌면 */
+    typeSelect.onchange = function(){
+    	console.log(draw);
+    	/* 커서효과 초기화 */
+        map.removeInteraction(draw);
+        addInteraction();
+    };
+    
+    /* 지도 타입이 바뀌면 */
+    mapTypeSelect.onchange = function(){
+    	var mapType = mapTypeSelect.value;
+    	/* 지도타입 업데이트 함수 호출 */
+    	mapUpdate(mapType);
+    };
+    
+    /* 첫턴에는 무조건 한번 타야함 */
+    addInteraction();
+    
+	/* 선택한 타입으로 도형생성모양 변경 */
+    function addInteraction(){
+        var value = typeSelect.value;
+        if (value !== 'None'){
+            draw = new ol.interaction.Draw({
+                source: source,
+                type: value
+            });
+            map.addInteraction(draw);
+        }else if (value == 'Marker') {
+			alert("Marker");
+		}
+    }
+})
+
+
+/* 지도생성 모듈 */
+function createMap(){
+	raster = new ol.layer.Tile({
+	source: new ol.source.OSM()
+	});
+	/* wrapX는 False로 둘때 화면상의 동일한 좌표에 대해 중복으로 도형을 표시하지 않도록 한다 */
+	source = new ol.source.Vector({ wrapX: false });
+	vector = new ol.layer.Vector({
+		source: source
+	});
+	
+	map = new ol.Map({
+		target: 'map',
+		layers: [new ol.layer.Tile({
+					source: new ol.source.XYZ({
+						url: 'http://xdworld.vworld.kr:8080/2d/Base/202002/{z}/{x}/{y}.png'
+					})
+				}),
+					vector
+				],
+		view: new ol.View({
+	        center: new ol.geom.Point([ 126.97659953, 37.579220423 ])
+	        .transform('EPSG:4326', 'EPSG:3857')
+	    	.getCoordinates(),
+			zoom: 13,
+			minZoom: 6.5,
+			maxZoom: 19
+		})
+	});
+};
 
 /* 지도유형 변경 */
 function mapUpdate(option){	
@@ -21,132 +99,69 @@ function mapUpdate(option){
 	map.removeLayer(hybridLayer);
 	map.removeLayer(satelliteLayer);
 	switch (option) {
-	case 'vword':
+	case 'vWord':
 		map.addLayer(rasterLayer);
-		markerView();
 		break;
-	case 'hybrid':
+	case 'Hybrid':
 		map.addLayer(satelliteLayer);
 		map.addLayer(hybridLayer);
-		markerView();
 		break;
-	case 'satellite':
+	case 'SatelLite':
 		map.addLayer(satelliteLayer);
-		markerView();
 		break;
 	case undefined:
 		map.addLayer(rasterLayer);
-		markerView();
 		break;
 	}
 }
 
-/* 마커현행유지 */
-function markerView(){
-	console.log(pointLocation.length);
-	console.log(pointLocation);
-	for (var i=0; i<pointLocation.length; i++) {
-		addMarker2(pointLocation[i]);
-	}
-}
-
-/* 지도 모듈 */
-function createMap(){
-	/* 벡터레이어 */
-	var vectorLayer = new ol.layer.Vector({
-		source: new ol.source.Vector()
+/* 차트그리기 모듈 */
+function createChart(){
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+	        datasets: [{
+	            label: 'Label',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }
+	        }
+	    }
 	});
-
-	var mousePositionCtrl = new ol.control.MousePosition({
-		  coordinateFormat: ol.coordinate.createStringXY(4),
-		  projection: 'EPSG:4326',
-		  className: 'custom-mouse-position',
-		  target: document.getElementById('mouse-position'),
-		  undefinedHTML: '&nbsp;'
-		});
-	
-	map = new ol.Map({
-		/* map DIV가 타겟 */
-		target: 'map',
-		controls: ol.control.defaults().extend( [mousePositionCtrl] ),
-		layers: [new ol.layer.Tile({
-					source: new ol.source.XYZ({
-						url: 'http://xdworld.vworld.kr:8080/2d/Base/202002/{z}/{x}/{y}.png'
-					})
-					}),
-					vectorLayer
-				],
-		view: new ol.View({
-	        center: new ol.geom.Point([ 126.97659953, 37.579220423 ])
-	      	/* GPS 좌표계 -> 구글 좌표계 */
-	        .transform('EPSG:4326', 'EPSG:3857')
-        	.getCoordinates(),
-			zoom: 7,
-			minZoom: 7,
-			maxZoom: 19
-		})
-	});
-	
-	/* 클릭한 지도위치 좌표 반환(배열) */
-	map.on('click', function(evt) {
-		console.log(evt)
-	    var coordinate = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
-	    /* 클릭한 좌표로 마커 생성 */
-	    addMarker(coordinate);
-	})
 }
 
-/* 마커생성 모듈 */
-function addMarker(coordinate){
-	pointLocation.push(coordinate);
-    var feature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([coordinate[0], coordinate[1]])) //경도 위도에 포인트 설정
-    });
-
-    /* 마커스타일 설정 */
-    var markerStyle = new ol.style.Style({
-        image: new ol.style.Icon({ //마커 이미지
-        	opacity: 1,
-        	scale: 1.2,
-            src: '/images/marker3.png'
-        })
-    });
-
-    var markerSource = new ol.source.Vector({
-        features: [feature]
-    });
-
-    var markerLayer = new ol.layer.Vector({
-        source: markerSource, 
-        style: markerStyle 
-    });
-    /* 지도에 마커가 그려진 레이어 추가 */
-    map.addLayer(markerLayer);
+function slideMenu() {
+	$("#rightDiv").hide();
+	$("#map").css("width", 2000);
 }
 
-/* 마커현행유지 위한 마커생성 모듈 */
-function addMarker2(coordinate){
-    var feature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([coordinate[0], coordinate[1]]))
-    });
-
-    /* 마커스타일 설정 */
-    var markerStyle = new ol.style.Style({
-        image: new ol.style.Icon({
-        	opacity: 1,
-        	scale: 1.2,
-            src: '/images/marker3.png'
-        })
-    });
-
-    var markerSource = new ol.source.Vector({
-        features: [feature]
-    });
-
-    var markerLayer = new ol.layer.Vector({
-        source: markerSource, 
-        style: markerStyle 
-    });
-    /* 지도에 마커추가 */
-    map.addLayer(markerLayer);
-}
+/* API호출 (기상청 예시) */
+/*
+ * function weatherApiCall(){ $.ajax({ type : "GET", url : "/weatherData.do",
+ * dataType : "JSON", success: function(result){ console.log(result.result); }
+ * }); }
+ */
