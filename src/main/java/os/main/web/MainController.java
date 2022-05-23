@@ -39,15 +39,6 @@ public class MainController {
 	@RequestMapping(value = "/mainPage.do")
 	public ModelAndView mainPage2(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
 		ModelAndView mav = new ModelAndView();		
-		String resultURL = "mainPage/polygon";
-		mav.setViewName(resultURL);
-		return mav;
-	}
-	
-	/* 메인페이지2 */
-	@RequestMapping(value = "/mainPage2.do")
-	public ModelAndView mainPage(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> commandMap) throws Exception {
-		ModelAndView mav = new ModelAndView();		
 		String resultURL = "mainPage/mainPage";
 		mav.setViewName(resultURL);
 		return mav;
