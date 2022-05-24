@@ -16,9 +16,9 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
     
-    <!-- 스케쥴러파일이 존재하는 패키지 설정 -->
+    <!-- 패키지 설정 -->
     <context:component-scan base-package="os" />
-    <!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
+    <!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 (스케줄러) -->
     <task:scheduler id="jobScheduler" pool-size="10" />
     <task:annotation-driven scheduler="jobScheduler" />
 
