@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="os.mapper.security.security_mapper">
+<mapper namespace="os.security.service.impl.SecurityMapper">
 	<resultMap type="os.security.web.SecurityVO" id="securityVO">
 		<result column="user_id" property="userId"/>
 		<result column="user_pw" property="userPw"/>
