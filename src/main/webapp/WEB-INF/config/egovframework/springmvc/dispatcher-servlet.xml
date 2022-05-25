@@ -41,6 +41,20 @@
         <property name="paramName" value="language" />
     </bean>
     
+   <!-- Gmail Setting -->
+   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="ysm6768@gmail.com" />
+	    <property name="password" value="yangyum432788^^" />
+	    <property name="javaMailProperties">
+	    <props>
+	      <prop key="mail.smtp.auth">true</prop>
+	      <prop key="mail.smtp.starttls.enable">true</prop>
+	    </props>
+	    </property>
+  	</bean>
+    
     <!-- Json Setting -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="viewResolver" p:order="0" />
 	
@@ -76,7 +90,6 @@
 
     <!-- For Pagination Tag -->
     <bean id="imageRenderer" class="egovframework.example.cmmn.web.EgovImgPaginationRenderer"/>
-
     <bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
         <property name="rendererType">
             <map>
@@ -84,7 +97,31 @@
             </map>
         </property>
     </bean>
+    
+  	<!-- 인터셉터 설정을 위한 의존성 주입 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>
+    
+    <!-- 인터셉터 설정 조건 /** 모든 URL -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/**"/>
+			<mvc:exclude-mapping path="/loginPage.do"/>
+			<mvc:exclude-mapping path="/ErrorPage.do"/>
+			<mvc:exclude-mapping path="/findPassWord.do"/>
+			<mvc:exclude-mapping path="/email.do"/>
+			<mvc:exclude-mapping path="/signUpPage.do"/>
+			<!-- 인터셉터 클래스 위치 명시 -->
+			<bean class="os.security.config.Interceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+    
 	<!-- /For Pagination Tag -->
-
     <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
 </beans>

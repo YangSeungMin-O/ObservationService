@@ -1,22 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
                                  http://www.springframework.org/schema/beans/spring-beans.xsd
                                  http://www.springframework.org/schema/security
                                  http://www.springframework.org/schema/security/spring-security.xsd">
-        
-        <http auto-config="true" use-expressions="false">
-            <intercept-url pattern="/**" access="ROLE_USER" />
-        </http>
-        
-        <authentication-manager>
-            <authentication-provider>
-                <user-service>
-                    <user name="user" password="userPw" authorities="ROLE_USER"/>
-                    <user name="guest" password="guest" authorities="ROLE_GUEST"/>
-                </user-service>
-            </authentication-provider>
-        </authentication-manager>
+
+<!-- 인터셉터 경로 명시 -->                                 
+<beans:bean id="interceptorForExam" class="os.security.config.Interceptor"></beans:bean>
+
+	<!-- 로그인 및 로그아웃 설정 -->
+	<!-- 로그인 성공 및 실패 시 핸들러를 통해 제어 --> 
+	<http>
+	<csrf disabled="true"/>
+		<form-login login-page="/loginPage.do"
+					authentication-failure-url="/loginPage.do"
+					authentication-success-handler-ref="loginSuccessHandler"
+					authentication-failure-handler-ref="loginFailuerHandler"
+					 />
+		<logout logout-url="/logout"
+				invalidate-session="true"
+				logout-success-url="/loginPage.do"
+				/>			
+	</http>
+
+	<!-- 인증객체 시큐리티에게 맡김 -->
+	<!-- 유저서비스는 DB에서 유저정보를 가져오는 서비스단(한개)-밑에서 선언했음 -->
+	<authentication-manager>
+		<authentication-provider
+			user-service-ref="userService">
+			<password-encoder ref="passwordEncoder">
+				<salt-source user-property="userId" />
+			</password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- 유저서비스는 커스텀디테일스서비스임을 명시 -->
+	<beans:bean id="userService"
+		class="os.security.config.CustomUserDetailesService"></beans:bean>
+	<!-- 패스워드 인코더 암호화 방식 512 -->
+	<beans:bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<beans:constructor-arg value="512" />
+	</beans:bean>
+	
+	<!-- 로그인 성공 핸들러 설정 및 default 타겟 지정 -->
+	<beans:bean id="loginSuccessHandler" class="os.security.config.LoginSuccessHandler">
+		<beans:property name="defaultUrl" value="/mainPage.do"/>
+	</beans:bean>
+	<!-- 로그인 실패 핸들러 설정 및 default 타겟 지정 -->
+	<beans:bean id="loginFailuerHandler" class="os.security.config.LoginFailuerHandler" />
 </beans:beans>

@@ -1,3 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="os.mapper.security.security_mapper"></mapper>
+<mapper namespace="os.mapper.security.security_mapper">
+	<resultMap type="os.security.web.SecurityVO" id="securityVO">
+		<result column="user_id" property="userId"/>
+		<result column="user_pw" property="userPw"/>
+		<result column="user_name" property="username"/>
+		<result column="authorities" property="authorities"/>
+		<result column="enabled" property="enabled"/>
+	</resultMap>
+	<!-- 사용자 요청 URL의 필요권한 가져오기 -->
+	<select id="select" resultType="String">
+		SELECT authority
+		FROM   com_authority
+		WHERE  url = #{url}
+	</select>
+	
+	<!-- 사용자인증을 위해 정보가져오기 -->
+	<select id="login" parameterType="String" resultMap="securityVO">
+		SELECT * FROM com_user WHERE user_id = #{userId}
+	</select>
+	
+	<!-- 회원가입정보 등록 -->
+	<insert id="signUp">
+		INSERT INTO users
+		(user_id, user_pw, user_name, authority, lgn_fail_cnt, reg_dt, gender)
+			VALUES(#{id}, #{password} , #{name}, #{authorities}, #{failcnt}, now(), #{gender})
+	</insert>
+	
+	<!-- FAILCNT 조회 -->
+	<select id="selectCnt" resultType="int">
+		SELECT lgn_fail_cnt
+		FROM   com_user
+		WHERE  user_id = #{userId}
+	</select>
+	
+	<!-- FAILCNT 증가 -->
+	<update id="PlusCnt">
+		UPDATE com_user set lgn_fail_cnt = lgn_fail_cnt + 1
+		WHERE  user_id = #{userId}
+	</update>
+	
+	<!-- 계정잠금 -->
+	<update id="lock">
+		UPDATE com_user
+		SET enabled = 0
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- FAILCNT 초기화 -->
+	<update id="resetCnt">
+		UPDATE com_user
+		SET lgn_fail_cnt = 0
+		WHERE user_id = #{userId}
+	</update>
+	
+	<select id="exists" resultType="int">
+		SELECT COUNT(*)
+		FROM  com_user
+		WHERE user_id = #{userId}
+	</select>	
+</mapper>
